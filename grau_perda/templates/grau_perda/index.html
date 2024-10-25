@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+    <h1 class="h3 mb-2 text-gray-800">Classificação do grau da perda auditiva</h1>
+    <p class="mb-4">Para a classificação da perda auditiva quanto ao grau, são encontradas na literatura diversas
+        recomendações. A Organização Mundial de Saúde (2020) publicou material intitulado Basic Ear and Hearing Care
+        Resource no qual utilizou a classificação dos Graus de Deficiência Auditiva REVISADA (Quadro 6), ou seja,
+        considerou o limiar de 20 dB como sendo uma perda auditiva de grau leve e recomenda que seja vista juntamente
+        com a Classificação Internacional de Funcionalidade (CIF).</p>
+
+    <div class="card shadow mb-4">
+        <div class="card-header">
+            <div class="row">
+                <div class="col"><h5>Classificação do grau da perda auditiva</h5></div>
+                <div class="col col-lg-2">
+                    <a type="button" class="btn btn-primary float-end" href="{% url 'grau_perda:create' %}"><i class="bi bi-plus"></i>Novo</a>
+                </div>
+            </div>
+        </div>
+
+        {% if graus_list %}
+            <div class="card-body">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th scope="col">Grau de perda auditiva</th>
+                            <th scope="col">Média entre as frequências de 500 Hz, 1 kHz, 2 kHz e 4 kHz</th>
+                            <th scope="col"></th>
+                            <th scope="col"></th>
+                            <th scope="col"></th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        {% for grau in graus_list %}
+                            <tr>
+                                <td>{{ grau.grau_perda }}</td>
+                                <td>{{ grau.media_frequencias }}</td>
+                                <td><a class="icon-link" href="{% url 'grau_perda:detail' grau.id %}"><img src="{% static 'assets/bootstrap/icons/search.svg'%}"></a></td>
+                                <td><a class="icon-link" href="{% url 'grau_perda:update' grau.id %}"><img src="{% static 'assets/bootstrap/icons/pencil.svg'%}"></a></td>
+                                <td><a class="icon-link" href="{% url 'grau_perda:delete' grau.id %}"><img src="{% static 'assets/bootstrap/icons/trash.svg'%}"></a></td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                <div class="row mt-3">
+                    <div class="col">
+                        {% include 'partials/_pagination.html' %}
+                    </div>
+                </div>
+            </div>
+        {% else %}
+            <p>No tipos are available.</p>
+        {% endif %}
+    </div>
+{% endblock content %}

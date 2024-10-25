@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+    <div class="card shadow mb-4">
+        <div class="card-body">
+            <form method="post">
+                {% csrf_token %}
+
+                <p>Are you sure you want to delete "{{ object }}"?</p>
+                <div id="div_id_grau_perda" class="mb-3">
+                    <label for="id_grau_perda" class="form-label requiredField">Grau de perda auditiva</label>
+                    <input type="text" name="grau_perda" value="{{ object.grau_perda }}" class="textinput form-control" id="id_grau_perda" readonly>
+                </div>
+
+                <div id="div_media_frequencias" class="mb-3">
+                    <label for="id_media_frequencias" class="form-label requiredField">Características</label>
+                    <input type="text" name="media_frequencias" value="{{ object.media_frequencias }}" class="textinput form-control" id="id_media_frequencias" readonly>
+                </div>
+
+                <div id="div_desempenho" class="mb-3">
+                    <label for="id_desempenho" class="form-label requiredField">Características</label>
+                    <input type="text" name="desempenho" value="{{ object.desempenho }}" class="textinput form-control" id="id_desempenho" readonly>
+                </div>
+
+                <input type="submit" value="Deletar" class="btn btn-danger">
+                <a href="{{ view.get_success_url }}" class="btn btn-light">Voltar</a>
+            </form>
+        </div>
+    </div>
+{% endblock content %}

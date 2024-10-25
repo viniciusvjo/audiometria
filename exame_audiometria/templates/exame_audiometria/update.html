@@ -1,0 +1,432 @@
+{% extends "base.html" %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+    <div class="card shadow mb-4">
+        <div class="card-body">
+            <form method="POST">
+                {% csrf_token %}
+
+                <div class="row g-3">
+                    <div id="div_id_paciente" class="mb-3">
+                        <label for="id_paciente" class="form-label"> Paciente</label>
+                        <input name="paciente" class="select form-select" required="" id="id_paciente" value="{{ object.paciente_id }}" readonly hidden="hidden"/>
+                        <input name="paciente_name" class="select form-select" required="" id="id_paciente_name" value="{{ object.paciente }}" readonly/>
+                    </div>
+
+                    <div id="div_id_data_exame" class="mb-3 col-md-6">
+                        <label for="id_data_exame" class="form-label requiredField"> Data do exame<span class="asteriskField">*</span> </label>
+
+                        <input type="text" name="data_exame" value="{{ object.data_exame|date:'d/m/Y, h:i A' }}" class="datetimeinput form-control" required="" id="id_data_exame">
+                        <input type="datetime-local" name="data_exame" value="{{ object.data_exame|date:'d/m/Y, h:i A' }}" class="datetimeinput form-control" required="" id="id_data_exame1">
+                    </div>
+
+                    <div id="div_id_tipo_exame" class="mb-3 col-md-6">
+                        <label for="id_tipo_exame" class="form-label requiredField"> Tipo exame<span class="asteriskField">*</span> </label>
+                        <select name="tipo_exame" class="select form-select" required="" id="id_tipo_exame">
+                            <option value="" selected="">(Selecione o tipo do exame)</option>
+                            <option value="AD" {% if object.tipo_exame == 'AD'  %}selected="selected"{% endif %}>Admissional</option>
+                            <option value="PE" {% if object.tipo_exame == 'PE'  %}selected="selected"{% endif %}>Periódico</option>
+                            <option value="DE" {% if object.tipo_exame == 'DE'  %}selected="selected"{% endif %}>Demissional</option>
+                            <option value="SM" {% if object.tipo_exame == 'SM'  %}selected="selected"{% endif %}>6º Mês</option>
+                            <option value="MF" {% if object.tipo_exame == 'MF'  %}selected="selected"{% endif %}>Mudança de Função</option>
+                            <option value="RT" {% if object.tipo_exame == 'RT'  %}selected="selected"{% endif %}>Retorno ao Trabalho</option>
+
+                        </select>
+                    </div>
+
+                    <hr class="my-3">
+
+                    <div class="row g-3 mb-3">
+                        <h5>Ouvido direito</h5>
+                        <h6>Vias aéreas</h6>
+                        <div id="div_id_od_via_aerea_250" class="col-sm">
+                            <label for="id_od_via_aerea_250" class="form-label requiredField"> 250<span class="asteriskField">*</span> </label>
+                            <input type="number" value="{{ object.od_via_aerea_250 }}" name="od_via_aerea_250" class="numberinput form-control" required="" id="id_od_via_aerea_250" onchange="create_chart_right_ear()"/>
+                        </div>
+                        <div id="div_id_od_via_aerea_500" class="col-sm">
+                            <label for="id_od_via_aerea_500" class="form-label requiredField"> 500<span class="asteriskField">*</span> </label>
+                            <input type="number" value="{{ object.od_via_aerea_500 }}" name="od_via_aerea_500" class="numberinput form-control" required="" id="id_od_via_aerea_500" onchange="create_chart_right_ear()"/>
+                        </div>
+                        <div id="div_id_od_via_aerea_1000" class="col-sm">
+                            <label for="id_od_via_aerea_1000" class="form-label requiredField"> 1000<span class="asteriskField">*</span> </label>
+                            <input type="number" value="{{ object.od_via_aerea_1000 }}" name="od_via_aerea_1000" class="numberinput form-control" required="" id="id_od_via_aerea_1000" onchange="create_chart_right_ear()"/>
+                        </div>
+                        <div id="div_id_od_via_aerea_2000" class="col-sm">
+                            <label for="id_od_via_aerea_2000" class="form-label requiredField"> 2000<span class="asteriskField">*</span> </label>
+                            <input type="number" value="{{ object.od_via_aerea_2000 }}" name="od_via_aerea_2000" class="numberinput form-control" required="" id="id_od_via_aerea_2000" onchange="create_chart_right_ear()"/>
+                        </div>
+                        <div id="div_id_od_via_aerea_3000" class="col-sm">
+                            <label for="id_od_via_aerea_3000" class="form-label requiredField"> 3000<span class="asteriskField">*</span> </label>
+                            <input type="number" value="{{ object.od_via_aerea_3000 }}" name="od_via_aerea_3000" class="numberinput form-control" required="" id="id_od_via_aerea_3000" onchange="create_chart_right_ear()"/>
+                        </div>
+                        <div id="div_id_od_via_aerea_4000" class="col-sm">
+                            <label for="id_od_via_aerea_4000" class="form-label requiredField"> 4000<span class="asteriskField">*</span> </label>
+                            <input type="number" value="{{ object.od_via_aerea_4000 }}" name="od_via_aerea_4000" class="numberinput form-control" required="" id="id_od_via_aerea_4000" onchange="create_chart_right_ear()"/>
+                        </div>
+                        <div id="div_id_od_via_aerea_6000" class="col-sm">
+                            <label for="id_od_via_aerea_6000" class="form-label requiredField"> 6000<span class="asteriskField">*</span> </label>
+                            <input type="number" value="{{ object.od_via_aerea_6000 }}" name="od_via_aerea_6000" class="numberinput form-control" required="" id="id_od_via_aerea_6000" onchange="create_chart_right_ear()"/>
+                        </div>
+                        <div id="div_id_od_via_aerea_8000" class="col-sm">
+                            <label for="id_od_via_aerea_8000" class="form-label requiredField"> 8000<span class="asteriskField">*</span> </label>
+                            <input type="number" value="{{ object.od_via_aerea_8000 }}" name="od_via_aerea_8000" class="numberinput form-control" required="" id="id_od_via_aerea_8000" onchange="create_chart_right_ear()"/>
+                        </div>
+                    </div>
+
+                    <div class="row g-3 mb-3">
+                        <h6>Vias ósseas</h6>
+                        <div id="div_id_od_via_ossea_250" class="col-sm">
+                            <label for="id_od_via_ossea_250" class="form-label requiredField"> 250<span class="asteriskField">*</span> </label>
+                            <input type="number" value="{{ object.od_via_ossea_250 }}" name="od_via_ossea_250" class="numberinput form-control" required="" id="id_od_via_ossea_250" onchange="create_chart_right_ear()"/>
+                        </div>
+                        <div id="div_id_od_via_ossea_500" class="col-sm">
+                            <label for="id_od_via_ossea_500" class="form-label requiredField"> 500<span class="asteriskField">*</span> </label>
+                            <input type="number" value="{{ object.od_via_ossea_500 }}" name="od_via_ossea_500" class="numberinput form-control" required="" id="id_od_via_ossea_500" onchange="create_chart_right_ear()"/>
+                        </div>
+                        <div id="div_id_od_via_ossea_1000" class="col-sm">
+                            <label for="id_od_via_ossea_1000" class="form-label requiredField"> 1000<span class="asteriskField">*</span> </label>
+                            <input type="number" value="{{ object.od_via_ossea_1000 }}" name="od_via_ossea_1000" class="numberinput form-control" required="" id="id_od_via_ossea_1000" onchange="create_chart_right_ear()"/>
+                        </div>
+                        <div id="div_id_od_via_ossea_2000" class="col-sm">
+                            <label for="id_od_via_ossea_2000" class="form-label requiredField"> 2000<span class="asteriskField">*</span> </label>
+                            <input type="number" value="{{ object.od_via_ossea_2000 }}" name="od_via_ossea_2000" class="numberinput form-control" required="" id="id_od_via_ossea_2000" onchange="create_chart_right_ear()"/>
+                        </div>
+                        <div id="div_id_od_via_ossea_3000" class="col-sm">
+                            <label for="id_od_via_ossea_3000" class="form-label requiredField"> 3000<span class="asteriskField">*</span> </label>
+                            <input type="number" value="{{ object.od_via_ossea_3000 }}" name="od_via_ossea_3000" class="numberinput form-control" required="" id="id_od_via_ossea_3000" onchange="create_chart_right_ear()"/>
+                        </div>
+                        <div id="div_id_od_via_ossea_4000" class="col-sm">
+                            <label for="id_od_via_ossea_4000" class="form-label requiredField"> 4000<span class="asteriskField">*</span> </label>
+                            <input type="number" value="{{ object.od_via_ossea_4000 }}" name="od_via_ossea_4000" class="numberinput form-control" required="" id="id_od_via_ossea_4000" onchange="create_chart_right_ear()"/>
+                        </div>
+                        <div id="div_id_od_via_ossea_6000" class="col-sm">
+                            <label for="id_od_via_ossea_6000" class="form-label requiredField"> 6000<span class="asteriskField">*</span> </label>
+                            <input type="number" value="{{ object.od_via_ossea_6000 }}" name="od_via_ossea_6000" class="numberinput form-control" required="" id="id_od_via_ossea_6000" onchange="create_chart_right_ear()"/>
+                        </div>
+                        <div id="div_id_od_via_ossea_8000" class="col-sm">
+                            <label for="id_od_via_ossea_8000" class="form-label requiredField"> 8000<span class="asteriskField">*</span> </label>
+                            <input type="number" value="{{ object.od_via_ossea_8000 }}" name="od_via_ossea_8000" class="numberinput form-control" required="" id="id_od_via_ossea_8000" onchange="create_chart_right_ear()"/>
+                        </div>
+                    </div>
+
+                    <div id="div_id_od_sequencial_referencial" class="mb-3 col-md-4">
+                        <label for="id_od_sequencial_referencial" class="form-label requiredField"> Sequencial/Referencial<span class="asteriskField">*</span> </label>
+                        <select name="od_sequencial_referencial" class="select form-select" required="" id="id_od_sequencial_referencial">
+                            <option value="" selected="">---------</option>
+                            <option value="S" {% if object.od_sequencial_referencial == 'S'  %}selected="selected"{% endif %}>Sequencial</option>
+                            <option value="R" {% if object.od_sequencial_referencial == 'R'  %}selected="selected"{% endif %}>Referencial</option>
+                        </select>
+                    </div>
+                    <div id="div_id_od_diagnostico_nosologico" class="mb-3 col-md-4">
+                        <label for="id_od_diagnostico_nosologico" class="form-label requiredField"> Diagnóstico nosológico<span class="asteriskField">*</span> </label>
+                        <select name="od_diagnostico_nosologico" class="select form-select" required="" id="id_od_diagnostico_nosologico">
+                            <option value="" selected="">(Selecione o diagnóstico nosológico)</option>
+                            <option value="NO" {% if object.od_diagnostico_nosologico == 'NO'  %}selected="selected"{% endif %}>Normal</option>
+                            <option value="PA" {% if object.od_diagnostico_nosologico == 'PA'  %}selected="selected"{% endif %}>PAO</option>
+                            <option value="PN" {% if object.od_diagnostico_nosologico == 'PN'  %}selected="selected"{% endif %}>PANO</option>
+                        </select>
+                    </div>
+                    <div id="div_id_od_diagnostico_evolutivo" class="mb-3 col-md-4">
+                        <label for="id_od_diagnostico_evolutivo" class="form-label requiredField"> Diagnóstico evolutivo<span class="asteriskField">*</span> </label>
+                        <select name="od_diagnostico_evolutivo" class="select form-select" required="" id="id_od_diagnostico_evolutivo">
+                            <option value="" selected="">(Selecione o diagnóstico evolutivo)</option>
+                            <option value="NO" {% if object.od_diagnostico_evolutivo == 'NO'  %}selected="selected"{% endif %}>Normal</option>
+                            <option value="ES" {% if object.od_diagnostico_evolutivo == 'ES'  %}selected="selected"{% endif %}>Estável</option>
+                            <option value="SP" {% if object.od_diagnostico_evolutivo == 'SP'  %}selected="selected"{% endif %}>Sugestivo de Painpse</option>
+                            <option value="AP" {% if object.od_diagnostico_evolutivo == 'AP'  %}selected="selected"{% endif %}>Agravamento de Painpse</option>
+                            <option value="DP" {% if object.od_diagnostico_evolutivo == 'DP'  %}selected="selected"{% endif %}>Desencadeamento de Painpse</option>
+                            <option value="NP" {% if object.od_diagnostico_evolutivo == 'NP'  %}selected="selected"{% endif %}>Não Sugestivo de Painpse</option>
+                        </select>
+                    </div>
+
+                    <hr class="my-3">
+
+                    <div class="row g-3 mb-3">
+                        <h5>Ouvido esquerdo</h5>
+                        <h6>Vias aéreas</h6>
+
+                        <div id="div_id_oe_via_aerea_250" class="col-sm">
+                            <label for="id_oe_via_aerea_250" class="form-label requiredField"> 250<span class="asteriskField">*</span> </label>
+                            <input type="number" value="{{ object.oe_via_aerea_250 }}" name="oe_via_aerea_250" class="numberinput form-control" required="" id="id_oe_via_aerea_250" onchange="create_chart_left_ear()"/>
+                        </div>
+                        <div id="div_id_oe_via_aerea_500" class="col-sm">
+                            <label for="id_oe_via_aerea_500" class="form-label requiredField"> 500<span class="asteriskField">*</span></label>
+                            <input type="number" value="{{ object.oe_via_aerea_500 }}" name="oe_via_aerea_500" class="numberinput form-control" required="" id="id_oe_via_aerea_500" onchange="create_chart_left_ear()"/>
+                        </div>
+                        <div id="div_id_oe_via_aerea_1000" class="col-sm">
+                            <label for="id_oe_via_aerea_1000" class="form-label requiredField"> 1000<span class="asteriskField">*</span> </label>
+                            <input type="number" value="{{ object.oe_via_aerea_1000 }}" name="oe_via_aerea_1000" class="numberinput form-control" required="" id="id_oe_via_aerea_1000" />
+                        </div>
+                        <div id="div_id_oe_via_aerea_2000" class="col-sm">
+                            <label for="id_oe_via_aerea_2000" class="form-label requiredField"> 2000<span class="asteriskField">*</span> </label>
+                            <input type="number" value="{{ object.oe_via_aerea_2000 }}" name="oe_via_aerea_2000" class="numberinput form-control" required="" id="id_oe_via_aerea_2000" />
+                        </div>
+                        <div id="div_id_oe_via_aerea_3000" class="col-sm">
+                            <label for="id_oe_via_aerea_3000" class="form-label requiredField"> 3000<span class="asteriskField">*</span> </label>
+                            <input type="number" value="{{ object.oe_via_aerea_3000 }}" name="oe_via_aerea_3000" class="numberinput form-control" required="" id="id_oe_via_aerea_3000" />
+                        </div>
+                        <div id="div_id_oe_via_aerea_4000" class="col-sm">
+                            <label for="id_oe_via_aerea_4000" class="form-label requiredField"> 4000<span class="asteriskField">*</span> </label>
+                            <input type="number" value="{{ object.oe_via_aerea_4000 }}" name="oe_via_aerea_4000" class="numberinput form-control" required="" id="id_oe_via_aerea_4000" />
+                        </div>
+                        <div id="div_id_oe_via_aerea_6000" class="col-sm">
+                            <label for="id_oe_via_aerea_6000" class="form-label requiredField"> 6000<span class="asteriskField">*</span> </label>
+                            <input type="number" value="{{ object.oe_via_aerea_6000 }}" name="oe_via_aerea_6000" class="numberinput form-control" required="" id="id_oe_via_aerea_6000" />
+                        </div>
+                        <div id="div_id_oe_via_aerea_8000" class="col-sm">
+                            <label for="id_oe_via_aerea_8000" class="form-label requiredField"> 8000<span class="asteriskField">*</span> </label>
+                            <input type="number" value="{{ object.oe_via_aerea_8000 }}" name="oe_via_aerea_8000" class="numberinput form-control" required="" id="id_oe_via_aerea_8000" />
+                        </div>
+                    </div>
+
+                    <div class="row g-3 mb-3">
+                        <h6>Vias ósseas</h6>
+                        <div id="div_id_oe_via_ossea_250" class="col-sm">
+                            <label for="id_oe_via_ossea_250" class="form-label requiredField"> 250<span class="asteriskField">*</span> </label>
+                            <input type="number" value="{{ object.oe_via_ossea_250 }}" name="oe_via_ossea_250" class="numberinput form-control" required="" id="id_oe_via_ossea_250" />
+                        </div>
+                        <div id="div_id_oe_via_ossea_500" class="col-sm">
+                            <label for="id_oe_via_ossea_500" class="form-label requiredField"> 500<span class="asteriskField">*</span> </label>
+                            <input type="number" value="{{ object.oe_via_ossea_500 }}" name="oe_via_ossea_500" class="numberinput form-control" required="" id="id_oe_via_ossea_500" />
+                        </div>
+                        <div id="div_id_oe_via_ossea_1000" class="col-sm">
+                            <label for="id_oe_via_ossea_1000" class="form-label requiredField"> 1000<span class="asteriskField">*</span> </label>
+                            <input type="number" value="{{ object.oe_via_ossea_1000 }}" name="oe_via_ossea_1000" class="numberinput form-control" required="" id="id_oe_via_ossea_1000" />
+                        </div>
+                        <div id="div_id_oe_via_ossea_2000" class="col-sm">
+                            <label for="id_oe_via_ossea_2000" class="form-label requiredField"> 2000<span class="asteriskField">*</span> </label>
+                            <input type="number" value="{{ object.oe_via_ossea_2000 }}" name="oe_via_ossea_2000" class="numberinput form-control" required="" id="id_oe_via_ossea_2000" />
+                        </div>
+                        <div id="div_id_oe_via_ossea_3000" class="col-sm">
+                            <label for="id_oe_via_ossea_3000" class="form-label requiredField"> 3000<span class="asteriskField">*</span> </label>
+                            <input type="number" value="{{ object.oe_via_ossea_3000 }}" name="oe_via_ossea_3000" class="numberinput form-control" required="" id="id_oe_via_ossea_3000" />
+                        </div>
+                        <div id="div_id_oe_via_ossea_4000" class="col-sm">
+                            <label for="id_oe_via_ossea_4000" class="form-label requiredField"> 4000<span class="asteriskField">*</span> </label>
+                            <input type="number" value="{{ object.oe_via_ossea_4000 }}" name="oe_via_ossea_4000" class="numberinput form-control" required="" id="id_oe_via_ossea_4000" />
+                        </div>
+                        <div id="div_id_oe_via_ossea_6000" class="col-sm">
+                            <label for="id_oe_via_ossea_6000" class="form-label requiredField"> 6000<span class="asteriskField">*</span> </label>
+                            <input type="number" value="{{ object.oe_via_ossea_6000 }}" name="oe_via_ossea_6000" class="numberinput form-control" required="" id="id_oe_via_ossea_6000" />
+                        </div>
+                        <div id="div_id_oe_via_ossea_8000" class="col-sm">
+                            <label for="id_oe_via_ossea_8000" class="form-label requiredField"> 8000<span class="asteriskField">*</span> </label>
+                            <input type="number" value="{{ object.oe_via_ossea_8000 }}" name="oe_via_ossea_8000" class="numberinput form-control" required="" id="id_oe_via_ossea_8000" />
+                        </div>
+                    </div>
+
+                    <div id="div_id_oe_sequencial_referencial" class="mb-3 col-md-4">
+                        <label for="id_oe_sequencial_referencial" class="form-label requiredField"> Sequencial/Referencial<span class="asteriskField">*</span> </label>
+                        <select name="oe_sequencial_referencial" class="select form-select" required="" id="id_oe_sequencial_referencial">
+                            <option value="" selected="">---------</option>
+                            <option value="S" {% if object.oe_sequencial_referencial == 'S'  %}selected="selected"{% endif %}>Sequencial</option>
+                            <option value="R" {% if object.oe_sequencial_referencial == 'R'  %}selected="selected"{% endif %}>Referencial</option>
+                        </select>
+                    </div>
+                    <div id="div_id_oe_diagnostico_nosologico" class="mb-3 col-md-4">
+                        <label for="id_oe_diagnostico_nosologico" class="form-label requiredField"> Diagnóstico nosológico<span class="asteriskField">*</span> </label>
+                        <select name="oe_diagnostico_nosologico" class="select form-select" required="" id="id_oe_diagnostico_nosologico">
+                            <option value="" selected="">(Selecione o diagnóstico nosológico)</option>
+                            <option value="NO" {% if object.oe_diagnostico_nosologico == 'NO'  %}selected="selected"{% endif %}>Normal</option>
+                            <option value="PA" {% if object.oe_diagnostico_nosologico == 'PA'  %}selected="selected"{% endif %}>PAO</option>
+                            <option value="PN" {% if object.oe_diagnostico_nosologico == 'PN'  %}selected="selected"{% endif %}>PANO</option>
+                        </select>
+                    </div>
+                    <div id="div_id_oe_diagnostico_evolutivo" class="mb-3 col-md-4">
+                        <label for="id_oe_diagnostico_evolutivo" class="form-label requiredField"> Diagnóstico evolutivo<span class="asteriskField">*</span> </label>
+                        <select name="oe_diagnostico_evolutivo" class="select form-select" required="" id="id_oe_diagnostico_evolutivo">
+                            <option value="" selected="">(Selecione o diagnóstico evolutivo)</option>
+                            <option value="NO" {% if object.oe_diagnostico_evolutivo == 'NO'  %}selected="selected"{% endif %}>Normal</option>
+                            <option value="ES" {% if object.oe_diagnostico_evolutivo == 'ES'  %}selected="selected"{% endif %}>Estável</option>
+                            <option value="SP" {% if object.oe_diagnostico_evolutivo == 'SP'  %}selected="selected"{% endif %}>Sugestivo de Painpse</option>
+                            <option value="AP" {% if object.oe_diagnostico_evolutivo == 'AP'  %}selected="selected"{% endif %}>Agravamento de Painpse</option>
+                            <option value="DP" {% if object.oe_diagnostico_evolutivo == 'DP'  %}selected="selected"{% endif %}>Desencadeamento de Painpse</option>
+                            <option value="NP" {% if object.oe_diagnostico_evolutivo == 'NP'  %}selected="selected"{% endif %}>Não Sugestivo de Painpse</option>
+                        </select>
+                    </div>
+                </div>
+
+                <hr class="my-3">
+
+                 <div class="row g-3">
+                    <div class="mb-3 col-md-6">
+                        <div id="chart_right_ear" style="width:100%; height:400px;"></div>
+                    </div>
+                    <div class="mb-3 col-md-6">
+                        <div id="chart_left_ear" style="width:100%; height:400px;"></div>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn btn-primary">Atualizar</button>
+                <a href="{% url 'exame_audiometria:index' %}" class="btn btn-light">Voltar</a>
+            </form>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        function create_chart_right_ear() {
+            var chartDom = document.getElementById('chart_right_ear');
+            var myChart = echarts.init(chartDom);
+            var option;
+            var data_od_via_aerea = [];
+            data_od_via_aerea.push(document.getElementById('id_od_via_aerea_250').value);
+            data_od_via_aerea.push(document.getElementById('id_od_via_aerea_500').value);
+            data_od_via_aerea.push(document.getElementById('id_od_via_aerea_1000').value);
+            data_od_via_aerea.push(document.getElementById('id_od_via_aerea_2000').value);
+            data_od_via_aerea.push(document.getElementById('id_od_via_aerea_3000').value);
+            data_od_via_aerea.push(document.getElementById('id_od_via_aerea_4000').value);
+            data_od_via_aerea.push(document.getElementById('id_od_via_aerea_6000').value);
+            data_od_via_aerea.push(document.getElementById('id_od_via_aerea_8000').value);
+
+
+            var data_od_via_ossea = [];
+            data_od_via_ossea.push(document.getElementById('id_od_via_ossea_250').value);
+            data_od_via_ossea.push(document.getElementById('id_od_via_ossea_500').value);
+            data_od_via_ossea.push(document.getElementById('id_od_via_ossea_1000').value);
+            data_od_via_ossea.push(document.getElementById('id_od_via_ossea_2000').value);
+            data_od_via_ossea.push(document.getElementById('id_od_via_ossea_3000').value);
+            data_od_via_ossea.push(document.getElementById('id_od_via_ossea_4000').value);
+            data_od_via_ossea.push(document.getElementById('id_od_via_ossea_6000').value);
+            data_od_via_ossea.push(document.getElementById('id_od_via_ossea_8000').value);
+
+            option = {
+              title: {
+                text: 'Ouvido Direito'
+              },
+              tooltip: {
+                trigger: 'axis'
+              },
+              legend: {
+                data: ['Via Aérea', 'Via Óssea']
+              },
+              grid: {
+                left: '3%',
+                right: '4%',
+                bottom: '3%',
+                containLabel: true
+              },
+              toolbox: {
+                feature: {
+                  saveAsImage: {}
+                }
+              },
+              xAxis: {
+                //name: 'Hz',
+                type: 'category',
+                boundaryGap: false,
+                data: ['250', '500', '1000', '2000', '3000', '4000', '6000', '8000']
+              },
+              yAxis: {
+                //name: 'dB',
+                type: 'value',
+                max: 120,
+                min: -10,
+                inverse: true,
+                interval: 10,
+              },
+              series: [
+                {
+                  name: 'Via Aérea',
+                  type: 'line',
+                  stack: 'Total',
+                  data: data_od_via_aerea
+                },
+                {
+                  name: 'Via Óssea',
+                  type: 'line',
+                  stack: 'Total',
+                  data: data_od_via_ossea
+                },
+              ]
+            };
+
+            option && myChart.setOption(option);
+        }
+
+        function create_chart_left_ear() {
+            var chartDom = document.getElementById('chart_left_ear');
+            var myChart = echarts.init(chartDom);
+            var option;
+            var data_oe_via_aerea = [];
+            data_oe_via_aerea.push(document.getElementById('id_oe_via_aerea_250').value);
+            data_oe_via_aerea.push(document.getElementById('id_oe_via_aerea_500').value);
+            data_oe_via_aerea.push(document.getElementById('id_oe_via_aerea_1000').value);
+            data_oe_via_aerea.push(document.getElementById('id_oe_via_aerea_2000').value);
+            data_oe_via_aerea.push(document.getElementById('id_oe_via_aerea_3000').value);
+            data_oe_via_aerea.push(document.getElementById('id_oe_via_aerea_4000').value);
+            data_oe_via_aerea.push(document.getElementById('id_oe_via_aerea_6000').value);
+            data_oe_via_aerea.push(document.getElementById('id_oe_via_aerea_8000').value);
+
+
+            var data_oe_via_ossea = [];
+            data_oe_via_ossea.push(document.getElementById('id_oe_via_ossea_250').value);
+            data_oe_via_ossea.push(document.getElementById('id_oe_via_ossea_500').value);
+            data_oe_via_ossea.push(document.getElementById('id_oe_via_ossea_1000').value);
+            data_oe_via_ossea.push(document.getElementById('id_oe_via_ossea_2000').value);
+            data_oe_via_ossea.push(document.getElementById('id_oe_via_ossea_3000').value);
+            data_oe_via_ossea.push(document.getElementById('id_oe_via_ossea_4000').value);
+            data_oe_via_ossea.push(document.getElementById('id_oe_via_ossea_6000').value);
+            data_oe_via_ossea.push(document.getElementById('id_oe_via_ossea_8000').value);
+
+            option = {
+              title: {
+                text: 'Ouvido Esquerdo'
+              },
+              tooltip: {
+                trigger: 'axis'
+              },
+              legend: {
+                data: ['Via Aérea', 'Via Óssea']
+              },
+              grid: {
+                left: '3%',
+                right: '4%',
+                bottom: '3%',
+                containLabel: true
+              },
+              toolbox: {
+                feature: {
+                  saveAsImage: {}
+                }
+              },
+              xAxis: {
+                //name: 'Hz',
+                type: 'category',
+                boundaryGap: false,
+                data: ['250', '500', '1000', '2000', '3000', '4000', '6000', '8000']
+              },
+              yAxis: {
+                //name: 'dB',
+                type: 'value',
+                max: 120,
+                min: -10,
+                inverse: true,
+                interval: 10,
+              },
+              series: [
+                {
+                  name: 'Via Aérea',
+                  type: 'line',
+                  stack: 'Total',
+                  data: data_oe_via_aerea
+                },
+                {
+                  name: 'Via Óssea',
+                  type: 'line',
+                  stack: 'Total',
+                  data: data_oe_via_ossea
+                },
+              ]
+            };
+
+            option && myChart.setOption(option);
+        }
+
+        document.addEventListener('DOMContentLoaded', function () {
+            create_chart_right_ear();
+            create_chart_left_ear();
+        });
+    </script>
+{% endblock content %}

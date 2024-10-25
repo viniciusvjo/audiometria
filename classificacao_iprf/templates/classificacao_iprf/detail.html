@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+    <div class="card shadow mb-4">
+        <div class="card-body">
+            <div id="div_resultado" class="mb-3">
+                <label for="id_resultado" class="form-label requiredField">Resultado de IPRF</label>
+                <input type="text" name="resultado" value="{{ object.resultado }}" class="textinput form-control" id="id_resultado" readonly>
+            </div>
+
+            <div id="div_dificuldade" class="mb-3">
+                <label for="id_dificuldade" class="form-label requiredField">Dificuldade de compreensão da fala</label>
+                <input type="text" name="dificuldade" value="{{ object.dificuldade }}" class="textinput form-control" id="id_dificuldade" readonly>
+            </div>
+
+            <a href="{% url 'classificacao_iprf:index' %}" class="btn btn-light">Voltar</a>
+        </div>
+    </div>
+{% endblock content %}

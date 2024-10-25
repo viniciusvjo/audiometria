@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+    <h1 class="h3 mb-2 text-gray-800">Audiometria</h1>
+    <p class="mb-4">Exame de audiometria.</p>
+
+    <div class="card shadow mb-4">
+        <div class="card-header">
+            <div class="row">
+                <div class="col"><h5>Audiometria</h5></div>
+                <div class="col col-lg-2">
+                    <a type="button" class="btn btn-primary float-end" href="{% url 'exame_audiometria:create' %}"><i class="bi bi-plus"></i>Novo</a>
+                </div>
+            </div>
+        </div>
+
+        {% if object %}
+            <div class="card-body">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th scope="col">Código</th>
+                            <th scope="col">Paciente</th>
+                            <th scope="col">Data</th>
+                            <th scope="col"></th>
+                            <th scope="col"></th>
+                            <th scope="col"></th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        {% for config in object %}
+                            <tr>
+                                <td>{{ config.id }}</td>
+                                <td>{{ config.paciente }}</td>
+                                <td>{{ config.data_exame }}</td>
+                                <td><a class="icon-link" href="{% url 'exame_audiometria:detail' config.id %}"><img src="{% static 'assets/bootstrap/icons/search.svg'%}"></a></td>
+                                <td><a class="icon-link" href="{% url 'exame_audiometria:update'  pk=config.pk %}"><img src="{% static 'assets/bootstrap/icons/pencil.svg'%}"></a></td>
+                                <td><a class="icon-link" href="{% url 'exame_audiometria:delete' config.id %}"><img src="{% static 'assets/bootstrap/icons/trash.svg'%}"></a></td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                <div class="row mt-3">
+                    <div class="col">
+                        {% include 'partials/_pagination.html' %}
+                    </div>
+                </div>
+            </div>
+        {% else %}
+            <p>No tipos are available.</p>
+        {% endif %}
+    </div>
+{% endblock content %}

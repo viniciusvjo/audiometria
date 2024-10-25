@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+    <div class="card shadow mb-4">
+        <div class="card-body">
+            <div id="div_id_tipo" class="mb-3">
+                <label for="id_tipo" class="form-label requiredField">Tipo</label>
+                <input type="text" name="tipo" value="{{ object.tipo }}" class="textinput form-control" id="id_tipo" readonly>
+            </div>
+
+            <div id="div_descricao" class="mb-3">
+                <label for="id_descricao" class="form-label requiredField">Descrição</label>
+                <input type="text" name="descricao" value="{{ object.descricao }}" class="textinput form-control" id="id_descricao" readonly>
+            </div>
+
+            <div id="div_caracteristicas" class="mb-3">
+                <label for="id_caracteristicas" class="form-label requiredField">Características</label>
+                <input type="text" name="caracteristicas" value="{{ object.caracteristicas }}" class="textinput form-control" id="id_caracteristicas" readonly>
+            </div>
+
+            <a href="{% url 'reflexo_acustico:index' %}" class="btn btn-light">Voltar</a>
+        </div>
+    </div>
+{% endblock content %}

@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+    <div class="card shadow mb-4">
+        <div class="card-body">
+            <form method="post">
+                {% csrf_token %}
+
+                <p>Are you sure you want to delete "{{ object }}"?</p>
+                <div id="div_id_tipo" class="mb-3">
+                    <label for="id_tipo" class="form-label requiredField">Tipo</label>
+                    <input type="text" name="tipo" value="{{ object.tipo }}" class="textinput form-control" id="id_tipo" readonly>
+                </div>
+
+                <div id="div_media_frequencias" class="mb-3">
+                    <label for="id_caracteristicas" class="form-label requiredField">Características</label>
+                    <textarea name="caracteristicas" class="textinput form-control" id="id_caracteristicas" readonly>{{ object.caracteristicas }}</textarea>
+                </div>
+
+                <input type="submit" value="Deletar" class="btn btn-danger">
+                <a href="{{ view.get_success_url }}" class="btn btn-light">Voltar</a>
+            </form>
+        </div>
+    </div>
+{% endblock content %}

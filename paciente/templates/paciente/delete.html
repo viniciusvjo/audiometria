@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+    <div class="card shadow mb-4">
+        <div class="card-body">
+            <form method="post">
+                {% csrf_token %}
+
+                <p>Are you sure you want to delete "{{ object }}"?</p>
+
+                <div id="div_nome" class="mb-3">
+                    <label for="id_nome" class="form-label requiredField">Nome</label>
+                    <input type="text" name="nome" value="{{ object.nome }}" class="textinput form-control" id="id_nome" readonly>
+                </div>
+
+                <div id="div_cpf" class="mb-3">
+                    <label for="id_cpf" class="form-label requiredField">CPF</label>
+                    <input type="text" name="cpf" value="{{ object.cpf }}" class="textinput form-control" id="id_cpf" readonly>
+                </div>
+
+                <div id="div_data_nascimento" class="mb-3">
+                    <label for="id_data_nascimento" class="form-label requiredField">Data de nascimento</label>
+                    <input type="text" name="caracteristicas" value="{{ object.data_nascimento }}" class="textinput form-control" id="id_data_nascimento" readonly>
+                </div>
+
+                <div id="div_endereco" class="mb-3">
+                    <label for="id_endereco" class="form-label requiredField">Endereço</label>
+                    <input type="text" name="endereco" value="{{ object.endereco }}" class="textinput form-control" id="id_endereco" readonly>
+                </div>
+
+                <input type="submit" value="Deletar" class="btn btn-danger">
+                <a href="{{ view.get_success_url }}" class="btn btn-light">Voltar</a>
+            </form>
+        </div>
+    </div>
+{% endblock content %}

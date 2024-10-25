@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+    <div class="card shadow mb-4">
+        <div class="card-body">
+            <div id="div_id_tipo_perda" class="mb-3">
+                <label for="id_tipo_perda" class="form-label requiredField">Tipo perda</label>
+                <input type="text" name="tipo_perda" value="{{ object.tipo_perda }}" class="textinput form-control" id="id_tipo_perda" readonly>
+            </div>
+
+            <div id="div_id_caracteristicas" class="mb-3">
+                <label for="id_caracteristicas" class="form-label requiredField">Características</label>
+                <input type="text" name="tipo_perda" value="{{ object.caracteristicas }}" class="textinput form-control" id="id_caracteristicas" readonly>
+            </div>
+
+            <a href="{% url 'tipo_perda_auditiva:index' %}" class="btn btn-light">Voltar</a>
+        </div>
+    </div>
+{% endblock content %}
