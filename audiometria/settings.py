@@ -32,6 +32,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'authentication.apps.AuthenticationConfig',
     'exame_audiometria.apps.ExameAudiometriaConfig',
     'paciente.apps.PacienteConfig',
     'reflexo_acustico.apps.ReflexoAcusticoConfig',
@@ -48,7 +49,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'crispy_forms',
     'crispy_bootstrap5',
-
 ]
 
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
@@ -126,6 +126,8 @@ LANGUAGE_CODE = 'pt-BR'
 TIME_ZONE = 'America/Sao_Paulo'
 
 USE_I18N = True
+
+USE_L10N = True
 
 USE_TZ = True
 

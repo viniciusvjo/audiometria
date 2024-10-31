@@ -3,29 +3,32 @@ from django.http import HttpResponse, HttpResponseRedirect
 from .models import Tipo
 from .forms import TipoForm
 from django.contrib import messages
-from django.views.generic import ListView, DetailView, FormView, CreateView, UpdateView, DeleteView
+from django.views.generic import ListView, DetailView, UpdateView, DeleteView
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.decorators import login_required
 from django.urls import reverse_lazy
 
-
-
 # Create your views here.
-class IndexView(ListView):
+class IndexView(LoginRequiredMixin, ListView):
     model = Tipo
     paginate_by = 10
     template_name = 'tipo_perda_auditiva/index.html'
     context_object_name = 'tipos_list'
     ordering = ['id']
+    login_url = "/authentication/login/"
 
 
-class TipoDetailView(DetailView):
+class TipoDetailView(LoginRequiredMixin, DetailView):
     model = Tipo
     template_name = 'tipo_perda_auditiva/detail.html'
     success_url = reverse_lazy('tipo_perda_auditiva:index')
+    login_url = "/authentication/login/"
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         return context
 
+@login_required(login_url="/authentication/login/")
 def createView(request):
     if request.method == "POST":
         form = TipoForm(request.POST)
@@ -42,21 +45,16 @@ def createView(request):
     return render(request, "tipo_perda_auditiva/create.html", {'form': form})
 
 
-class TipoUpdateView(UpdateView):
+class TipoUpdateView(LoginRequiredMixin, UpdateView):
     model = Tipo
     fields = ['tipo_perda', 'caracteristicas']
     template_name = 'tipo_perda_auditiva/update.html'
     success_url = reverse_lazy('tipo_perda_auditiva:index')
+    login_url = "/authentication/login/"
 
 
-class TipoDeleteView(DeleteView):
+class TipoDeleteView(LoginRequiredMixin, DeleteView):
     model = Tipo
     success_url = reverse_lazy('tipo_perda_auditiva:index')
     template_name = 'tipo_perda_auditiva/tipo_check_delete.html'
-    """
-    def post(self, request, *args, **kwargs):
-        if "cancel" in request.POST:
-            url = self.get_success_url()
-            return HttpResponseRedirect(url)
-        else:
-            return super(TipoDeleteView, self).post(request, *args, **kwargs)"""
+    login_url = "/authentication/login/"

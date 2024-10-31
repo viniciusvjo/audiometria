@@ -18,6 +18,7 @@ from django.contrib import admin
 from django.urls import include, path
 
 urlpatterns = [
+    path('authentication/', include('authentication.urls')),
     path('exame_audiometria/', include('exame_audiometria.urls')),
     path('paciente/', include('paciente.urls')),
     path('reflexo_acustico/', include('reflexo_acustico.urls')),

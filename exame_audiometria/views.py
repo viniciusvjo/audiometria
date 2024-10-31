@@ -1,4 +1,5 @@
-from lib2to3.fixes.fix_input import context
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render, get_object_or_404, redirect
 from .models import ExameAudiometria
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
@@ -7,21 +8,24 @@ from paciente.models import Paciente
 from .forms import ExameAudiometriaForm
 
 
-class ExameAudiometriaListView(ListView):
+class ExameAudiometriaListView(LoginRequiredMixin, ListView):
     model = ExameAudiometria
     paginate_by = 10
     template_name = 'exame_audiometria/index.html'
     context_object_name = 'object'
     ordering = ['id']
+    login_url = "/authentication/login/"
 
 
-class ExameAudiometriaDetailView(DetailView):
+class ExameAudiometriaDetailView(LoginRequiredMixin, DetailView):
     model = ExameAudiometria
     template_name = 'exame_audiometria/detail.html'
+    login_url = "/authentication/login/"
 
 
-class ExameAudiometriaCreateView(CreateView):
+class ExameAudiometriaCreateView(LoginRequiredMixin, CreateView):
     model = ExameAudiometria
+    login_url = "/authentication/login/"
     context_object_name = 'object'
     fields = '__all__'
     template_name = 'exame_audiometria/create.html'
@@ -33,7 +37,7 @@ class ExameAudiometriaCreateView(CreateView):
         context['pacientes_list'] = pacientes_list
         return context
 
-
+@login_required(login_url="/authentication/login/")
 def exame_audiometria_update(request, pk):
     exame_audiometria = get_object_or_404(ExameAudiometria, pk=pk)
 
@@ -45,16 +49,8 @@ def exame_audiometria_update(request, pk):
     return render(request, 'exame_audiometria/update.html', {'object': exame_audiometria})
 
 
-"""
-class ExameAudiometriaUpdateView(UpdateView):
-    model = ExameAudiometria
-    context_object_name = 'object'
-    fields = '__all__'
-    template_name = 'exame_audiometria/update.html'
-    success_url = reverse_lazy('exame_audiometria:index')
-"""
-
-class ExameAudiometriaDeleteView(DeleteView):
+class ExameAudiometriaDeleteView(LoginRequiredMixin, DeleteView):
     model = ExameAudiometria
     template_name = 'exame_audiometria/delete.html'
     success_url = reverse_lazy('exame_audiometria:index')
+    login_url = "/authentication/login/"

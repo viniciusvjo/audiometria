@@ -3,7 +3,7 @@
 
 {% block content %}
     <h1 class="h3 mb-2 text-gray-800">Audiometria</h1>
-    <p class="mb-4">Exame de audiometria.</p>
+    <p class="mb-4">Audiometria é o exame que avalia a capacidade de audição, identificando potenciais deficiências auditivas em pacientes de diferentes faixas etárias.</p>
 
     <div class="card shadow mb-4">
         <div class="card-header">
@@ -34,8 +34,8 @@
                             <tr>
                                 <td>{{ config.id }}</td>
                                 <td>{{ config.paciente }}</td>
-                                <td>{{ config.data_exame }}</td>
-                                <td><a class="icon-link" href="{% url 'exame_audiometria:detail' config.id %}"><img src="{% static 'assets/bootstrap/icons/search.svg'%}"></a></td>
+                                <td>{{ config.data_exame|date:'SHORT_DATETIME_FORMAT' }}</td>
+                                <!--<td><a class="icon-link" href="{% url 'exame_audiometria:detail' config.id %}"><img src="{% static 'assets/bootstrap/icons/search.svg'%}"></a></td>-->
                                 <td><a class="icon-link" href="{% url 'exame_audiometria:update'  pk=config.pk %}"><img src="{% static 'assets/bootstrap/icons/pencil.svg'%}"></a></td>
                                 <td><a class="icon-link" href="{% url 'exame_audiometria:delete' config.id %}"><img src="{% static 'assets/bootstrap/icons/trash.svg'%}"></a></td>
                             </tr>
