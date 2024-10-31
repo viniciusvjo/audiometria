@@ -14,8 +14,11 @@ def user_login(request):
         else:
             messages.error(request, "Usuário inválido")
             return redirect("authentication:login")
-    else:
-        return render(request, 'authentication/login.html')
+
+    if request.user.is_authenticated:
+        return redirect("tipo_perda_auditiva:index")
+
+    return render(request, 'authentication/login.html')
 
 def user_logout(request):
     logout(request)
