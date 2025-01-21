@@ -1,1 +1,6 @@
 Django
+certifi
+crispy-bootstrap5
+django-bootstrap5
+django-crispy-forms
+weasyprint

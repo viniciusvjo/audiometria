@@ -271,6 +271,7 @@
             var chartDom = document.getElementById('chart_right_ear');
             var myChart = echarts.init(chartDom);
             var option;
+
             var data_od_via_aerea = [];
             data_od_via_aerea.push(document.getElementById('id_od_via_aerea_250').value);
             data_od_via_aerea.push(document.getElementById('id_od_via_aerea_500').value);
@@ -280,7 +281,6 @@
             data_od_via_aerea.push(document.getElementById('id_od_via_aerea_4000').value);
             data_od_via_aerea.push(document.getElementById('id_od_via_aerea_6000').value);
             data_od_via_aerea.push(document.getElementById('id_od_via_aerea_8000').value);
-
 
             var data_od_via_ossea = [];
             data_od_via_ossea.push(document.getElementById('id_od_via_ossea_250').value);
@@ -350,6 +350,7 @@
             var chartDom = document.getElementById('chart_left_ear');
             var myChart = echarts.init(chartDom);
             var option;
+
             var data_oe_via_aerea = [];
             data_oe_via_aerea.push(document.getElementById('id_oe_via_aerea_250').value);
             data_oe_via_aerea.push(document.getElementById('id_oe_via_aerea_500').value);
@@ -359,7 +360,6 @@
             data_oe_via_aerea.push(document.getElementById('id_oe_via_aerea_4000').value);
             data_oe_via_aerea.push(document.getElementById('id_oe_via_aerea_6000').value);
             data_oe_via_aerea.push(document.getElementById('id_oe_via_aerea_8000').value);
-
 
             var data_oe_via_ossea = [];
             data_oe_via_ossea.push(document.getElementById('id_oe_via_ossea_250').value);
@@ -411,18 +411,20 @@
                   name: 'Via Aérea',
                   type: 'line',
                   stack: 'Total',
-                  data: data_oe_via_aerea
+                  data: [100,10,5,10,5,10,5,10], // data_oe_via_aerea
                 },
                 {
                   name: 'Via Óssea',
                   type: 'line',
                   stack: 'Total',
-                  data: data_oe_via_ossea
+                  data: [10,25,15,25,15,5,30,45], //data_oe_via_ossea
                 },
               ]
             };
 
             option && myChart.setOption(option);
+            console.log('Via aerea esquerdo: ' + data_oe_via_aerea);
+            console.log('Via ossea esquerdo: ' + data_oe_via_ossea);
         }
 
         document.addEventListener('DOMContentLoaded', function () {

@@ -100,8 +100,8 @@
       <main class="form-signin w-100 m-auto">
          <form method="POST" action="{% url 'authentication:login' %}">
            {% csrf_token %}
-           <h1 class="display-5 text-center">Audiometria</h1>
-
+           <h1 class="display-5 text-center text-primary-emphasis">Audiometria</h1>
+            <hr class="my-3">
             <h1 class="h3 mb-3 fw-normal">Entrar</h1>
            {% include "partials/_messages.html" %}
             <div class="form-floating">

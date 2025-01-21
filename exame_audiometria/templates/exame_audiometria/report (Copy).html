@@ -1,0 +1,170 @@
+<html>
+  <head>
+    <meta charset="utf-8">
+    <link href="./report.css" rel="stylesheet">
+    <title>Report</title>
+    <meta name="description" content="Report example">
+  </head>
+
+  <body>
+
+<article id="skills">
+    <h3 id="typography-title">Exame de Audiometria</h3>
+
+    <section id="table-content">
+        <p>
+            <strong>Nome:</strong> {{ exame_audiometria.paciente }}
+            <br>
+            <strong>Data de nascimento:</strong> {{ exame_audiometria.paciente.data_nascimento|date:'SHORT_DATE_FORMAT' }}
+            <br>
+            <strong>Data do exame:</strong> {{ exame_audiometria.data_exame|date:'SHORT_DATETIME_FORMAT' }}
+            <br>
+            <strong>Tipo do exame:</strong> {{ exame_audiometria.get_tipo_exame_display }}
+        </p>
+    </section>
+</article>
+
+<article id="typography">
+    <section id="figures">
+        <h4>Ouvido Direito</h4>
+    </section>
+
+
+    <h5>Vias Aéreas</h5>
+
+    <table style="width:100%">
+        <tr>
+            <th>250</th>
+            <th>500</th>
+            <th>1000</th>
+            <th>2000</th>
+            <th>3000</th>
+            <th>4000</th>
+            <th>6000</th>
+            <th>8000</th>
+            <th>Hz</th>
+        </tr>
+        <tr>
+            <td> {{ exame_audiometria.od_via_aerea_250 }}</td>
+            <td> {{ exame_audiometria.od_via_aerea_500 }}</td>
+            <td> {{ exame_audiometria.od_via_aerea_1000 }}</td>
+            <td> {{ exame_audiometria.od_via_aerea_2000 }}</td>
+            <td> {{ exame_audiometria.od_via_aerea_3000 }}</td>
+            <td> {{ exame_audiometria.od_via_aerea_4000 }}</td>
+            <td> {{ exame_audiometria.od_via_aerea_6000 }}</td>
+            <td> {{ exame_audiometria.od_via_aerea_8000 }}</td>
+        </tr>
+    </table>
+
+    <h5>Vias Ósseas</h5>
+
+    <table style="width:100%">
+        <tr>
+            <th>250</th>
+            <th>500</th>
+            <th>1000</th>
+            <th>2000</th>
+            <th>3000</th>
+            <th>4000</th>
+            <th>6000</th>
+            <th>8000</th>
+            <th>Hz</th>
+        </tr>
+        <tr>
+            <td> {{ exame_audiometria.od_via_aerea_250 }}</td>
+            <td> {{ exame_audiometria.od_via_ossea_500 }}</td>
+            <td> {{ exame_audiometria.od_via_ossea_1000 }}</td>
+            <td> {{ exame_audiometria.od_via_ossea_2000 }}</td>
+            <td> {{ exame_audiometria.od_via_ossea_3000 }}</td>
+            <td> {{ exame_audiometria.od_via_ossea_4000 }}</td>
+            <td> {{ exame_audiometria.od_via_ossea_6000 }}</td>
+            <td> {{ exame_audiometria.od_via_ossea_8000 }}</td>
+        </tr>
+    </table>
+    <br>
+
+    <table style="width:100%">
+        <tr>
+            <th>Sequencial/Referencial</th>
+            <th>Diagnóstico nosológico</th>
+            <th>Diagnóstico evolutivo</th>
+        </tr>
+        <tr>
+            <td> {{ exame_audiometria.get_od_sequencial_referencial_display }} </td>
+            <td> {{ exame_audiometria.get_od_diagnostico_nosologico_display }} </td>
+            <td> {{ exame_audiometria.get_od_diagnostico_evolutivo_display }} </td>
+        </tr>
+    </table>
+
+    <section>
+        <h4>Ouvido Esquerdo</h4>
+    </section>
+
+    <h5>Vias Aéreas</h5>
+
+    <table style="width:100%">
+        <tr>
+            <th>250</th>
+            <th>500</th>
+            <th>1000</th>
+            <th>2000</th>
+            <th>3000</th>
+            <th>4000</th>
+            <th>6000</th>
+            <th>8000</th>
+            <th>Hz</th>
+        </tr>
+        <tr>
+            <td> {{ exame_audiometria.oe_via_aerea_250 }}</td>
+            <td> {{ exame_audiometria.oe_via_aerea_500 }}</td>
+            <td> {{ exame_audiometria.oe_via_aerea_1000 }}</td>
+            <td> {{ exame_audiometria.oe_via_aerea_2000 }}</td>
+            <td> {{ exame_audiometria.oe_via_aerea_3000 }}</td>
+            <td> {{ exame_audiometria.oe_via_aerea_4000 }}</td>
+            <td> {{ exame_audiometria.oe_via_aerea_6000 }}</td>
+            <td> {{ exame_audiometria.oe_via_aerea_8000 }}</td>
+        </tr>
+    </table>
+
+    <h5>Vias Ósseas</h5>
+
+    <table style="width:100%">
+        <tr>
+            <th>250</th>
+            <th>500</th>
+            <th>1000</th>
+            <th>2000</th>
+            <th>3000</th>
+            <th>4000</th>
+            <th>6000</th>
+            <th>8000</th>
+            <th>Hz</th>
+        </tr>
+        <tr>
+            <td> {{ exame_audiometria.oe_via_aerea_250 }}</td>
+            <td> {{ exame_audiometria.oe_via_ossea_500 }}</td>
+            <td> {{ exame_audiometria.oe_via_ossea_1000 }}</td>
+            <td> {{ exame_audiometria.oe_via_ossea_2000 }}</td>
+            <td> {{ exame_audiometria.oe_via_ossea_3000 }}</td>
+            <td> {{ exame_audiometria.oe_via_ossea_4000 }}</td>
+            <td> {{ exame_audiometria.oe_via_ossea_6000 }}</td>
+            <td> {{ exame_audiometria.oe_via_ossea_8000 }}</td>
+        </tr>
+    </table>
+
+    <table style="width:100%">
+        <tr>
+            <th>Sequencial/Referencial</th>
+            <th>Diagnóstico nosológico</th>
+            <th>Diagnóstico evolutivo</th>
+        </tr>
+        <tr>
+            <td> {{ exame_audiometria.get_oe_sequencial_referencial_display }} </td>
+            <td> {{ exame_audiometria.get_oe_diagnostico_nosologico_display }} </td>
+            <td> {{ exame_audiometria.get_oe_diagnostico_evolutivo_display }} </td>
+        </tr>
+    </table>
+</article>
+
+  </body>
+</html>

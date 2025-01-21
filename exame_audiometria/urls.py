@@ -19,4 +19,8 @@ urlpatterns = [
 
     # ex: /exame_audiometria/delete/3
     path("delete/<int:pk>", views.ExameAudiometriaDeleteView.as_view(), name="delete"),
+
+    path("export-pdf", views.export_pdf, name="export-pdf"),
+
+    path("search/", views.Search.as_view(), name="search"),
 ]

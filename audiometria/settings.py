@@ -127,7 +127,9 @@ TIME_ZONE = 'America/Sao_Paulo'
 
 USE_I18N = True
 
-USE_L10N = True
+USE_L10N = False  # True
+
+DATE_FORMAT = "%d/%m/%Y"
 
 USE_TZ = True
 
@@ -151,3 +153,8 @@ MESSAGE_TAGS = {
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+try:
+    from audiometria.local_settings import *
+except ImportError:
+    ...

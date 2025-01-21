@@ -5,11 +5,20 @@
     <h1 class="h3 mb-2 text-gray-800">Audiometria</h1>
     <p class="mb-4">Audiometria é o exame que avalia a capacidade de audição, identificando potenciais deficiências auditivas em pacientes de diferentes faixas etárias.</p>
 
+    <form name="search_query" method="GET" action="{% url 'exame_audiometria:search' %}" class="w-100 me-3" role="search">
+        <input type="search" class="form-control" placeholder="Buscar..." aria-label="Buscar" name="search" value="{{ request.GET.search }}">
+        <input type="date" name="data_exame_search" data-date-format="dd-mm-YYYY" class="datetimeinput form-control" value="{{ request.GET.data_exame_search }}">
+        <input type="date" name="begin"
+           placeholder="dd-mm-yyyy" value=""
+           min="1997-01-01" max="2030-12-31">
+    </form>
+    <br>
     <div class="card shadow mb-4">
         <div class="card-header">
             <div class="row">
                 <div class="col"><h5>Audiometria</h5></div>
                 <div class="col col-lg-2">
+                    <a type="button" class="btn btn-outline-light me-2 float" href="{% url 'exame_audiometria:export-pdf'%}"><img class="bi bi-file-earmark-pdf-fill"  src="{% static 'assets/bootstrap/icons/file-earmark-pdf-fill.svg'%}"></a>
                     <a type="button" class="btn btn-primary float-end" href="{% url 'exame_audiometria:create' %}"><i class="bi bi-plus"></i>Novo</a>
                 </div>
             </div>
@@ -52,4 +61,8 @@
             <p>No tipos are available.</p>
         {% endif %}
     </div>
+
+    <script type="text/javascript">
+        document.getElementById("search_query").onchange.submit();
+    </script>
 {% endblock content %}
